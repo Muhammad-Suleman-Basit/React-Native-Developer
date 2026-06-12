@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { memo, useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import {
   Home,
   ListChecks,
@@ -271,9 +271,12 @@ function ScreenStats() {
 
 /* ------------------------------ phone ------------------------------ */
 
-export default function PhoneMockup() {
+function PhoneMockup() {
   const [screen, setScreen] = useState(0);
   const timer = useRef(null);
+  const rootRef = useRef(null);
+  // Pause the auto-cycle (and its spring animations) while offscreen.
+  const inView = useInView(rootRef, { amount: 0.25 });
 
   const startTimer = () => {
     clearInterval(timer.current);
@@ -281,9 +284,10 @@ export default function PhoneMockup() {
   };
 
   useEffect(() => {
+    if (!inView) return;
     startTimer();
     return () => clearInterval(timer.current);
-  }, []);
+  }, [inView]);
 
   const pick = (i) => {
     setScreen(i);
@@ -293,9 +297,15 @@ export default function PhoneMockup() {
   const screens = [<ScreenProfile key="p" />, <ScreenRoadmap key="r" />, <ScreenStats key="s" />];
 
   return (
-    <div className="relative" style={{ perspective: '1400px' }}>
-      {/* glow under the device */}
-      <div className="absolute left-1/2 top-1/2 -z-10 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-violet-600/30 via-fuchsia-500/20 to-cyan-400/30 blur-[70px]" />
+    <div ref={rootRef} className="relative" style={{ perspective: '1400px' }}>
+      {/* glow under the device — soft radial gradient, no blur() filter */}
+      <div
+        className="absolute left-1/2 top-1/2 -z-10 h-[130%] w-[130%] -translate-x-1/2 -translate-y-1/2"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, rgba(139,92,246,0.3) 0%, rgba(232,121,249,0.16) 40%, rgba(34,211,238,0.1) 60%, transparent 75%)',
+        }}
+      />
 
       {/* frame */}
       <div className="relative mx-auto h-[560px] w-[270px] rounded-[3rem] bg-gradient-to-b from-zinc-600 via-zinc-800 to-zinc-700 p-[3px] shadow-2xl shadow-violet-900/40 sm:h-[590px] sm:w-[285px]">
@@ -372,3 +382,6 @@ export default function PhoneMockup() {
     </div>
   );
 }
+
+// memo: the hero's typewriter used to re-render this whole tree every ~65ms
+export default memo(PhoneMockup);

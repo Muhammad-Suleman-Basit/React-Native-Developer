@@ -33,16 +33,22 @@ function useTypewriter(words, typeMs = 65, deleteMs = 35, holdMs = 1700) {
   return text;
 }
 
+/* Isolated so the 65ms typing ticks only re-render this tiny span,
+   not the whole hero (phone mockup, buttons, socials…). */
+function TypedRole() {
+  const typed = useTypewriter(TYPING_ROLES);
+  return <span className="text-gradient">{typed}</span>;
+}
+
 const container = {
   hidden: {},
   show: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } },
 };
 const item = {
-  hidden: { opacity: 0, y: 26, filter: 'blur(8px)' },
+  hidden: { opacity: 0, y: 26 },
   show: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: { duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] },
   },
 };
@@ -55,8 +61,6 @@ const ORBIT_CHIPS = [
 ];
 
 export default function Hero() {
-  const typed = useTypewriter(TYPING_ROLES);
-
   // 3D tilt for the phone
   const rx = useSpring(useMotionValue(0), { stiffness: 110, damping: 14 });
   const ry = useSpring(useMotionValue(0), { stiffness: 110, damping: 14 });
@@ -104,7 +108,7 @@ export default function Hero() {
 
           <motion.div variants={item} className="mt-5 flex h-9 items-center font-display text-xl font-semibold sm:text-2xl">
             <span className="text-muted mr-2">I&apos;m a</span>
-            <span className="text-gradient">{typed}</span>
+            <TypedRole />
             <span className="anim-caret ml-1 inline-block h-6 w-[3px] rounded bg-fuchsia-400 sm:h-7" />
           </motion.div>
 
@@ -172,7 +176,7 @@ export default function Hero() {
           {ORBIT_CHIPS.map((c, i) => (
             <span
               key={c.label}
-              className={`glass anim-float absolute z-20 hidden rounded-xl px-3 py-1.5 text-xs font-bold sm:block ${c.pos}`}
+              className={`chip anim-float absolute z-20 hidden rounded-xl px-3 py-1.5 text-xs font-bold sm:block ${c.pos}`}
               style={{ animationDelay: `${i * 0.9}s`, animationDuration: `${5.5 + i}s` }}
             >
               {c.label}

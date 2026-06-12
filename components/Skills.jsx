@@ -14,7 +14,9 @@ function MarqueeRow({ items, reverse = false }) {
         {doubled.map((t, i) => (
           <span
             key={`${t}-${i}`}
-            className="glass shine whitespace-nowrap rounded-xl px-4 py-2 text-sm font-semibold transition-colors duration-300 hover:text-violet-400"
+            // .chip, not .glass — backdrop-filter on constantly-moving
+            // elements forces a backdrop resample every single frame
+            className="chip whitespace-nowrap rounded-xl px-4 py-2 text-sm font-semibold transition-colors duration-300 hover:text-violet-400"
           >
             {t}
           </span>
