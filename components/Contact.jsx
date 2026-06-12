@@ -65,12 +65,15 @@ export default function Contact() {
           <div className="glass-strong rounded-[2rem] p-6 sm:p-10">
             <div className="grid gap-4 sm:grid-cols-2">
               {CHANNELS.map(({ Icon, label, desc, href, glow, icon, ring }, i) => (
-                <Reveal key={label} delay={0.08 * i} className={label === 'LinkedIn' ? 'sm:col-span-2 sm:mx-auto sm:w-[calc(50%-0.5rem)]' : ''}>
+                {/* min-w-0: without it the unbreakable email address sets the
+                    grid column's minimum width and all cards overflow the card
+                    container on phones */}
+                <Reveal key={label} delay={0.08 * i} className={`min-w-0 ${label === 'LinkedIn' ? 'sm:col-span-2 sm:mx-auto sm:w-[calc(50%-0.5rem)]' : ''}`}>
                   <a
                     href={href}
                     target="_blank"
                     rel="noreferrer"
-                    className={`glass shine group flex items-center gap-4 rounded-2xl bg-gradient-to-br ${glow} p-5 ring-1 ${ring} transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl`}
+                    className={`glass shine group flex min-w-0 items-center gap-4 rounded-2xl bg-gradient-to-br ${glow} p-5 ring-1 ${ring} transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl`}
                   >
                     <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white/10 ${icon} ring-1 ring-white/15 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6`}>
                       <Icon size={22} />
