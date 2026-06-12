@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <footer className="relative z-10 mx-auto max-w-6xl px-5 pb-10 sm:px-8">
       <div className="h-px w-full bg-gradient-to-r from-transparent via-violet-500/40 to-transparent" />
-      <div className="mt-7 flex flex-wrap items-center justify-between gap-5">
+      <div className="mt-7 flex flex-wrap items-center justify-center gap-5 text-center sm:justify-between sm:text-left">
         <p className="text-muted text-sm">
           © 2026 {CONTACT.name}. Designed & built with{' '}
           <Heart size={13} className="mx-0.5 inline text-fuchsia-500" fill="currentColor" /> using

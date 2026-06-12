@@ -49,7 +49,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative mx-auto max-w-6xl scroll-mt-28 px-5 py-24 sm:px-8">
+    <section id="contact" className="relative mx-auto max-w-6xl scroll-mt-28 px-5 py-16 sm:px-8 sm:py-24">
       <SectionHeading
         eyebrow="contact"
         title={

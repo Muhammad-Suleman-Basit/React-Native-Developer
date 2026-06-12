@@ -45,7 +45,7 @@ const STRENGTHS = [
 
 export default function About() {
   return (
-    <section id="about" className="relative mx-auto max-w-6xl scroll-mt-28 px-5 py-24 sm:px-8">
+    <section id="about" className="relative mx-auto max-w-6xl scroll-mt-28 px-5 py-16 sm:px-8 sm:py-24">
       <SectionHeading
         eyebrow="about"
         title={
@@ -58,7 +58,7 @@ export default function About() {
       <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
         {/* story */}
         <Reveal>
-          <div className="glass shine h-full rounded-3xl p-7 sm:p-9">
+          <div className="glass shine h-full rounded-3xl p-6 sm:p-9">
             <p className="text-base leading-relaxed sm:text-lg">
               I didn&apos;t start in mobile — and that&apos;s my advantage. After graduating in
               Computer Science (2024), I spent my first years in tech doing the unglamorous,

@@ -78,8 +78,8 @@ export default function Hero() {
   };
 
   return (
-    <section id="top" className="relative mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-5 pb-16 pt-32 sm:px-8 lg:pt-24">
-      <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-6">
+    <section id="top" className="hero-min-h relative mx-auto flex max-w-6xl flex-col justify-center px-5 pb-16 pt-28 sm:px-8 sm:pt-32 lg:pt-24">
+      <div className="grid items-center gap-10 sm:gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-6">
         {/* ------------ copy ------------ */}
         <motion.div variants={container} initial="hidden" animate="show">
           <motion.div variants={item} className="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-2 glass shine">
@@ -106,7 +106,9 @@ export default function Hero() {
             <span className="text-gradient">Suleman</span>
           </motion.h1>
 
-          <motion.div variants={item} className="mt-5 flex h-9 items-center font-display text-xl font-semibold sm:text-2xl">
+          {/* min-h + wrap: a fixed h-9 clipped the longer roles when they
+              wrapped to two lines on narrow phones */}
+          <motion.div variants={item} className="mt-5 flex min-h-9 flex-wrap items-center font-display text-lg font-semibold sm:text-2xl">
             <span className="text-muted mr-2">I&apos;m a</span>
             <TypedRole />
             <span className="anim-caret ml-1 inline-block h-6 w-[3px] rounded bg-fuchsia-400 sm:h-7" />
@@ -120,20 +122,21 @@ export default function Hero() {
             title, relentless by habit.
           </motion.p>
 
-          <motion.div variants={item} className="mt-9 flex flex-wrap items-center gap-4">
-            <Magnetic>
+          {/* stacked full-width CTAs on phones, inline on larger screens */}
+          <motion.div variants={item} className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <Magnetic className="w-full sm:w-auto">
               <a
                 href="#contact"
-                className="shine group inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-500 px-7 py-3.5 font-bold text-white shadow-xl shadow-fuchsia-600/30 transition-transform duration-300 active:scale-95"
+                className="shine group inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-500 px-7 py-3.5 font-bold text-white shadow-xl shadow-fuchsia-600/30 transition-transform duration-300 active:scale-95 sm:w-auto"
               >
                 Let&apos;s talk
                 <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </Magnetic>
-            <Magnetic strength={0.25}>
+            <Magnetic strength={0.25} className="w-full sm:w-auto">
               <a
                 href="#skills"
-                className="glass shine inline-flex items-center gap-2 rounded-2xl px-7 py-3.5 font-bold transition-transform duration-300 hover:scale-105 active:scale-95"
+                className="glass shine inline-flex w-full items-center justify-center gap-2 rounded-2xl px-7 py-3.5 font-bold transition-transform duration-300 hover:scale-105 active:scale-95 sm:w-auto"
               >
                 View skills
               </a>

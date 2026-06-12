@@ -5,7 +5,7 @@ import Reveal from './Reveal';
 
 export default function SectionHeading({ eyebrow, title, sub }) {
   return (
-    <div className="mb-12 md:mb-16">
+    <div className="mb-8 sm:mb-12 md:mb-16">
       <Reveal>
         <p className="eyebrow mb-3">{`// ${eyebrow}`}</p>
       </Reveal>

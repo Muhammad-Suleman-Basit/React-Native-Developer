@@ -63,6 +63,22 @@ body {
   transition: background-color 0.6s ease, color 0.6s ease;
 }
 
+/* Hero fills the *small* viewport height on mobile so the layout
+   doesn't jump when the browser URL bar collapses while scrolling. */
+.hero-min-h {
+  min-height: 100vh;
+}
+@supports (height: 100svh) {
+  .hero-min-h {
+    min-height: 100svh;
+  }
+}
+
+/* nicer multi-line wrapping for headings on narrow screens */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
 ::selection {
   background: rgba(139, 92, 246, 0.35);
   color: inherit;

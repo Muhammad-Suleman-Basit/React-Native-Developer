@@ -15,7 +15,7 @@ export default function Experience() {
   });
 
   return (
-    <section id="experience" className="relative mx-auto max-w-6xl scroll-mt-28 px-5 py-24 sm:px-8">
+    <section id="experience" className="relative mx-auto max-w-6xl scroll-mt-28 px-5 py-16 sm:px-8 sm:py-24">
       <SectionHeading
         eyebrow="experience"
         title={
