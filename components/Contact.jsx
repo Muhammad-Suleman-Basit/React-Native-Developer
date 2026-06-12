@@ -63,11 +63,11 @@ export default function Contact() {
       <Reveal>
         <div className="liquid-ring rounded-[2rem]">
           <div className="glass-strong rounded-[2rem] p-6 sm:p-10">
+            {/* min-w-0 on grid items: without it the unbreakable email address
+                sets the grid column's minimum width and all cards overflow the
+                card container on phones */}
             <div className="grid gap-4 sm:grid-cols-2">
               {CHANNELS.map(({ Icon, label, desc, href, glow, icon, ring }, i) => (
-                {/* min-w-0: without it the unbreakable email address sets the
-                    grid column's minimum width and all cards overflow the card
-                    container on phones */}
                 <Reveal key={label} delay={0.08 * i} className={`min-w-0 ${label === 'LinkedIn' ? 'sm:col-span-2 sm:mx-auto sm:w-[calc(50%-0.5rem)]' : ''}`}>
                   <a
                     href={href}
