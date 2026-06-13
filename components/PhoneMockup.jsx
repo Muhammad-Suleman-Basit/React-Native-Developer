@@ -298,9 +298,12 @@ function PhoneMockup() {
 
   return (
     <div ref={rootRef} className="relative" style={{ perspective: '1400px' }}>
-      {/* glow under the device — soft radial gradient, no blur() filter */}
+      {/* glow under the device — soft radial gradient, no blur() filter.
+          pointer-events-none: it overflows the phone by ~15% on every side and,
+          when the layout stacks on mobile, that overflow sits over the social
+          buttons above the phone and would otherwise eat their taps. */}
       <div
-        className="absolute left-1/2 top-1/2 -z-10 h-[130%] w-[130%] -translate-x-1/2 -translate-y-1/2"
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[130%] w-[130%] -translate-x-1/2 -translate-y-1/2"
         style={{
           background:
             'radial-gradient(ellipse at center, rgba(139,92,246,0.3) 0%, rgba(232,121,249,0.16) 40%, rgba(34,211,238,0.1) 60%, transparent 75%)',
