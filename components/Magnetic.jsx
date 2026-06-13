@@ -9,6 +9,10 @@ export default function Magnetic({ children, strength = 0.35, className = '' }) 
   const y = useSpring(useMotionValue(0), { stiffness: 200, damping: 16, mass: 0.6 });
 
   const onMove = (e) => {
+    // Touch devices fire a synthetic mousemove on tap, which would shift the
+    // element out from under the finger and make the tap miss the link.
+    // Only run the magnetic pull for a real (fine, hovering) pointer.
+    if (e.pointerType && e.pointerType !== 'mouse') return;
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
     x.set((e.clientX - (rect.left + rect.width / 2)) * strength);
@@ -23,8 +27,8 @@ export default function Magnetic({ children, strength = 0.35, className = '' }) 
   return (
     <motion.div
       ref={ref}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
+      onPointerMove={onMove}
+      onPointerLeave={onLeave}
       style={{ x, y }}
       className={`inline-block ${className}`}
     >

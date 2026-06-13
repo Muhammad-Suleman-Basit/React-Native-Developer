@@ -37,7 +37,7 @@ export default function Experience() {
         <div className="space-y-10">
           {EXPERIENCE.map((job, i) => (
             <Reveal key={job.role} delay={0.05}>
-              <article className="relative">
+               <article className="relative">
                 {/* node */}
                 <span className="absolute -left-8 top-7 grid h-6 w-6 place-items-center sm:-left-12 sm:h-8 sm:w-8">
                   <span className="absolute h-full w-full rounded-full bg-violet-500/30" style={{ animation: 'ping-ring 2.2s ease-out infinite', animationDelay: `${i * 0.4}s` }} />

@@ -146,15 +146,15 @@ export default function Hero() {
           {/* socials */}
           <motion.div variants={item} className="mt-9 flex items-center gap-3">
             {[
-              { Icon: Linkedin, href: CONTACT.linkedin, label: 'LinkedIn' },
-              { Icon: Mail, href: `mailto:${CONTACT.email}`, label: 'Email' },
-              { Icon: MessageCircle, href: `https://wa.me/${CONTACT.whatsapp}`, label: 'WhatsApp' },
-            ].map(({ Icon, href, label }) => (
+              { Icon: Linkedin, href: CONTACT.linkedin, label: 'LinkedIn', external: true },
+              { Icon: Mail, href: `mailto:${CONTACT.email}`, label: 'Email', external: false },
+              { Icon: MessageCircle, href: `https://wa.me/${CONTACT.whatsapp}`, label: 'WhatsApp', external: true },
+            ].map(({ Icon, href, label, external }) => (
               <Magnetic key={label} strength={0.4}>
                 <a
                   href={href}
-                  target="_blank"
-                  rel="noreferrer"
+                  target={external ? '_blank' : undefined}
+                  rel={external ? 'noreferrer' : undefined}
                   aria-label={label}
                   className="glass shine grid h-11 w-11 place-items-center rounded-xl transition-all duration-300 hover:scale-110 hover:text-violet-400"
                 >
@@ -189,9 +189,14 @@ export default function Hero() {
           {/* dashed orbit ring */}
           <div className="anim-spin-slow absolute left-1/2 top-1/2 -z-10 hidden h-[125%] w-[150%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-violet-400/25 sm:block" />
 
-          <motion.div style={{ rotateX: rx, rotateY: ry, transformStyle: 'preserve-3d' }} className="anim-float-slow">
-            <PhoneMockup />
-          </motion.div>
+          {/* float lives on the outer wrapper so it composes with framer-motion's
+              tilt transform on the inner div (same-element transforms would clobber
+              each other and the float would never show) */}
+          <div className="anim-float-slow">
+            <motion.div style={{ rotateX: rx, rotateY: ry, transformStyle: 'preserve-3d' }}>
+              <PhoneMockup />
+            </motion.div>
+          </div>
         </motion.div>
       </div>
 
